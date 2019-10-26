@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sailfish.powershardingjdbc.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.sailfish.powershardingjdbc.entity.User">
+
+        <id property="userId" column="user_id" />
+        <result property="username" column="username" />
+
+    </resultMap>
+
+    <sql id="baseColumn">
+      user_id, username
+    </sql>
+
+
+    <select id="selectById" parameterType="Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="baseColumn"/>
+        FROM t_user
+        WHERE
+        user_id = #{userId}
+    </select>
+
+    <insert id="insert" parameterType="com.sailfish.powershardingjdbc.entity.User">
+        INSERT INTO t_user
+        (
+          user_id,
+          username
+        )
+        VALUES
+        (
+          #{user.userId},
+          #{user.username}
+        )
+    </insert>
+
+</mapper>
